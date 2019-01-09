@@ -1291,7 +1291,7 @@ class Line:
         if not self:
             return "\n"
 
-        indent = "    " * self.depth
+        indent = "\t" * self.depth
         leaves = iter(self.leaves)
         first = next(leaves)
         res = f"{first.prefix}{indent}{first.value}"
@@ -2536,8 +2536,8 @@ def normalize_string_quotes(leaf: Leaf) -> None:
         orig_quote = '"'
         new_quote = "'"
     else:
-        orig_quote = "'"
-        new_quote = '"'
+        orig_quote = '"'
+        new_quote = "'"
     first_quote_pos = leaf.value.find(orig_quote)
     if first_quote_pos == -1:
         return  # There's an internal error
@@ -2578,7 +2578,7 @@ def normalize_string_quotes(leaf: Leaf) -> None:
     if new_escape_count > orig_escape_count:
         return  # Do not introduce more escaping
 
-    if new_escape_count == orig_escape_count and orig_quote == '"':
+    if new_escape_count == orig_escape_count and orig_quote == "'":
         return  # Prefer double quotes
 
     leaf.value = f"{prefix}{new_quote}{new_body}{new_quote}"
